@@ -1,0 +1,14 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "footer_menu_1": "footer",
+        "footer_menu_2": "footer-collections"
+      }
+    }
+  },
+  "order": ["footer"]
+}

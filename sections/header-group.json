@@ -1,0 +1,23 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "🏭 Factory-Direct Custom Sportswear | MOQ 5 Pieces | Pan-India Delivery | WhatsApp: +91 99971 00375",
+        "bg_color": "#0B1F33",
+        "text_color": "#FFFFFF",
+        "dismissible": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}
