@@ -1,0 +1,146 @@
+{% comment %}
+  Section: main-cart.liquid
+  Full cart page (used when cart_type = 'page')
+{% endcomment %}
+
+<div class="container" style="padding-top:40px;padding-bottom:80px;" id="cart-page">
+  <h1 class="h2" style="color:var(--color-primary);margin-bottom:32px;">{{ 'cart.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    <div style="display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start;">
+
+      <!-- Cart items -->
+      <div>
+        <!-- Bulk discount notice -->
+        {%- if settings.show_bulk_discount -%}
+          {%- assign bulk_min = settings.bulk_discount_min_qty | default: 5 -%}
+          {%- assign bulk_pct = settings.bulk_discount_percentage | default: 50 -%}
+          {%- if cart.item_count >= bulk_min -%}
+            <div class="bulk-discount-notice active" style="margin-bottom:20px;">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;color:var(--color-success);"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>🎉 <strong>Bulk discount ({{ bulk_pct }}% off)</strong> will be applied at checkout!</span>
+            </div>
+          {%- else -%}
+            {%- assign remaining = bulk_min | minus: cart.item_count -%}
+            <div class="bulk-discount-notice" style="margin-bottom:20px;">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;color:var(--color-accent);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Add <strong>{{ remaining }} more piece{{ remaining | pluralize: '', 's' }}</strong> to unlock <strong>{{ bulk_pct }}% off</strong> at checkout</span>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- form 'cart', cart -%}
+          {%- for item in cart.items -%}
+            <div class="cart-item" style="padding:20px 0;" id="cart-item-{{ item.key }}">
+              <!-- Image -->
+              {%- if item.image -%}
+                <img
+                  class="cart-item-image"
+                  src="{{ item.image | image_url: width: 160 }}"
+                  alt="{{ item.title | escape }}"
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="cart-item-image" style="background:var(--color-bg);"></div>
+              {%- endif -%}
+
+              <!-- Details -->
+              <div>
+                <a href="{{ item.url }}" class="cart-item-title">{{ item.product_title }}</a>
+                {%- if item.variant_title != blank -%}
+                  <p class="cart-item-variant">{{ item.variant_title }}</p>
+                {%- endif -%}
+                <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+                  <div class="quantity-selector" style="height:36px;">
+                    <button type="button" style="width:36px;height:36px;" class="quantity-btn" aria-label="Decrease"
+                      onclick="this.closest('.quantity-selector').querySelector('input').stepDown(); this.closest('form').querySelector('[name=updates\\[{{ item.key }}\\]]').value = this.closest('.quantity-selector').querySelector('input').value; this.closest('form').submit();">−</button>
+                    <input
+                      type="number"
+                      name="updates[{{ item.key }}]"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      class="quantity-input"
+                      style="width:44px;height:36px;"
+                      aria-label="Quantity"
+                      onchange="this.closest('form').submit()"
+                    >
+                    <button type="button" style="width:36px;height:36px;" class="quantity-btn" aria-label="Increase"
+                      onclick="this.closest('.quantity-selector').querySelector('input').stepUp(); this.closest('form').querySelector('[name=updates\\[{{ item.key }}\\]]').value = this.closest('.quantity-selector').querySelector('input').value; this.closest('form').submit();">+</button>
+                  </div>
+                  <a href="{{ item.url_to_remove }}" style="font-size:12px;color:var(--color-muted);" aria-label="Remove {{ item.title }}">Remove</a>
+                </div>
+              </div>
+
+              <!-- Price -->
+              <div class="cart-item-price">{{ item.final_line_price | money }}</div>
+            </div>
+          {%- endfor -%}
+        {%- endform -%}
+      </div>
+
+      <!-- Order Summary -->
+      <div style="background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--border-radius-md);padding:24px;position:sticky;top:calc(var(--header-height) + 24px);">
+        <h2 style="font-size:16px;font-weight:700;color:var(--color-primary);margin-bottom:20px;">Order Summary</h2>
+
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;">
+          <span style="color:var(--color-muted);">Subtotal ({{ cart.item_count }} item{{ cart.item_count | pluralize: '', 's' }})</span>
+          <span style="font-weight:600;color:var(--color-primary);">{{ cart.total_price | money }}</span>
+        </div>
+
+        {%- if settings.show_bulk_discount and cart.item_count >= settings.bulk_discount_min_qty -%}
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:var(--color-success);">
+            <span>Bulk discount ({{ settings.bulk_discount_percentage }}% off)</span>
+            <span>Applied at checkout</span>
+          </div>
+        {%- endif -%}
+
+        <div style="border-top:1px solid var(--color-border);margin:16px 0;"></div>
+        <p style="font-size:12px;color:var(--color-muted);margin-bottom:16px;">{{ 'cart.taxes_note' | t }}</p>
+
+        {%- if settings.show_order_note -%}
+          {%- form 'cart', cart -%}
+            <div style="margin-bottom:16px;">
+              <label class="form-label" for="cart-note-page">{{ 'cart.order_note_label' | t }}</label>
+              <textarea
+                name="note"
+                id="cart-note-page"
+                class="form-textarea"
+                rows="3"
+                placeholder="{{ 'cart.order_note_placeholder' | t }}"
+              >{{ cart.note }}</textarea>
+            </div>
+            <button type="submit" style="display:none;">Save</button>
+          {%- endform -%}
+        {%- endif -%}
+
+        <a href="/checkout" class="btn btn-primary btn-full btn-lg">{{ 'cart.checkout' | t }}</a>
+        <a href="/collections/all" class="btn btn-secondary btn-full" style="margin-top:8px;">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+
+    </div>
+
+  {%- else -%}
+    <div style="text-align:center;padding:80px 20px;">
+      <svg width="64" height="64" fill="none" stroke="var(--color-muted)" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 20px;opacity:0.4;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
+      </svg>
+      <h2 style="font-size:20px;font-weight:700;color:var(--color-primary);margin-bottom:8px;">{{ 'cart.empty' | t }}</h2>
+      <p style="color:var(--color-muted);margin-bottom:24px;">{{ 'cart.empty_message' | t }}</p>
+      <a href="/collections/all" class="btn btn-primary btn-lg">Shop Sportswear</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Cart Page"
+    }
+  ]
+}
+{% endschema %}

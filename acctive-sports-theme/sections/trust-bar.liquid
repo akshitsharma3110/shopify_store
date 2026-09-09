@@ -1,0 +1,126 @@
+{% comment %}
+  Section: trust-bar.liquid
+  4 trust points: Factory Direct, Fully Customizable, Pan-India Delivery, Since 2003
+{% endcomment %}
+
+<section class="trust-bar" id="trust-bar">
+  <div class="container">
+    <div class="trust-bar-grid">
+      {%- for i in (1..4) -%}
+        {%- liquid
+          case i
+          when 1
+            assign default_title = 'Factory Direct'
+            assign default_desc = 'Cut out the middleman — order straight from our Meerut factory'
+            assign icon_path = 'M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z'
+          when 2
+            assign default_title = 'Fully Customizable'
+            assign default_desc = 'Your logo, colors, and design on any product'
+            assign icon_path = 'M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z'
+          when 3
+            assign default_title = 'Pan-India Delivery'
+            assign default_desc = 'We ship to every corner of India'
+            assign icon_path = 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 10m-3 0a3 3 0 106 0 3 3 0 00-6 0z'
+          when 4
+            assign default_title = 'Since 2003'
+            assign default_desc = '20+ years of sportswear manufacturing expertise'
+            assign icon_path = 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'
+          endcase
+          assign title_key = 'title_' | append: i
+          assign desc_key = 'desc_' | append: i
+          assign trust_title = section.settings[title_key] | default: default_title
+          assign trust_desc = section.settings[desc_key] | default: default_desc
+        -%}
+        <div class="trust-item">
+          <div class="trust-icon" aria-hidden="true">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="{{ icon_path }}"/>
+            </svg>
+          </div>
+          <div>
+            <p class="trust-label">{{ trust_title }}</p>
+            <p class="trust-desc">{{ trust_desc }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Trust Point 1"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Title",
+      "default": "Factory Direct"
+    },
+    {
+      "type": "text",
+      "id": "desc_1",
+      "label": "Description",
+      "default": "Cut out the middleman — order straight from our Meerut factory"
+    },
+    {
+      "type": "header",
+      "content": "Trust Point 2"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title",
+      "default": "Fully Customizable"
+    },
+    {
+      "type": "text",
+      "id": "desc_2",
+      "label": "Description",
+      "default": "Your logo, colors, and design on any product"
+    },
+    {
+      "type": "header",
+      "content": "Trust Point 3"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Title",
+      "default": "Pan-India Delivery"
+    },
+    {
+      "type": "text",
+      "id": "desc_3",
+      "label": "Description",
+      "default": "We ship to every corner of India"
+    },
+    {
+      "type": "header",
+      "content": "Trust Point 4"
+    },
+    {
+      "type": "text",
+      "id": "title_4",
+      "label": "Title",
+      "default": "Since 2003"
+    },
+    {
+      "type": "text",
+      "id": "desc_4",
+      "label": "Description",
+      "default": "20+ years of sportswear manufacturing expertise"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Bar"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,300 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "ACCTIVE Sports",
+    "theme_version": "1.0.0",
+    "theme_author": "ACCTIVE Sports Industries",
+    "theme_documentation_url": "https://github.com/acctive-sports/acctive-sports-theme",
+    "theme_support_url": "https://wa.me/919997100375"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary (Header, Footer)",
+        "default": "#0B1F33"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (Buttons, Highlights)",
+        "default": "#FF6B1A"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_hover",
+        "label": "Accent Hover",
+        "default": "#E85A0C"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Page Background",
+        "default": "#F8FAFC"
+      },
+      {
+        "type": "color",
+        "id": "color_card_bg",
+        "label": "Card Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Body Text",
+        "default": "#17212B"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted Text",
+        "default": "#64748B"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Borders",
+        "default": "#E2E8F0"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font Settings"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body Font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "body_font_size",
+        "label": "Body Font Size (px)",
+        "min": 14,
+        "max": 18,
+        "step": 1,
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page Width (px)",
+        "min": 1100,
+        "max": 1600,
+        "step": 20,
+        "default": 1280
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections",
+        "label": "Section Spacing (px)",
+        "min": 40,
+        "max": 100,
+        "step": 4,
+        "default": 64
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "header_sticky",
+        "label": "Sticky header",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "custom_order_label",
+        "label": "Custom Order Button Label",
+        "default": "Custom Order"
+      },
+      {
+        "type": "url",
+        "id": "custom_order_url",
+        "label": "Custom Order Button URL"
+      }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand Name",
+        "default": "ACCTIVE Sports Industries"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo Width (px)",
+        "min": 80,
+        "max": 280,
+        "step": 4,
+        "default": 160
+      }
+    ]
+  },
+  {
+    "name": "Contact & Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Contact Information"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp Number (with country code, no +)",
+        "default": "919997100375",
+        "info": "Example: 919997100375 for +91 99971 00375"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact Email",
+        "default": "activesportswears@gmail.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_address",
+        "label": "Address",
+        "default": "Meerut, Uttar Pradesh, India"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone_display",
+        "label": "Phone (Display)",
+        "default": "+91 99971 00375"
+      },
+      {
+        "type": "header",
+        "content": "Social Media"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      }
+    ]
+  },
+  {
+    "name": "Bulk Discount",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Bulk Discount Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_bulk_discount",
+        "label": "Show bulk discount notice",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "bulk_discount_min_qty",
+        "label": "Minimum quantity for bulk discount",
+        "min": 2,
+        "max": 20,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "bulk_discount_percentage",
+        "label": "Bulk discount percentage",
+        "min": 5,
+        "max": 70,
+        "step": 5,
+        "default": 50
+      },
+      {
+        "type": "text",
+        "id": "bulk_discount_message",
+        "label": "Bulk discount message",
+        "default": "5+ pieces — save 50% at checkout"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_order_note",
+        "label": "Show order notes field",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "footer_logo",
+        "label": "Footer Logo (optional)"
+      },
+      {
+        "type": "richtext",
+        "id": "footer_tagline",
+        "label": "Footer Tagline",
+        "default": "<p>Factory-direct custom sportswear from Meerut, India. Quality you can trust since 2003.</p>"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  }
+]

@@ -1,0 +1,94 @@
+{% comment %}
+  Section: shop-by-sport.liquid
+  Sport filter tags linking to collection with sport filter
+{% endcomment %}
+
+<section class="section section--sm" id="shop-by-sport" style="background-color:var(--color-bg);">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="section-subheading" style="margin-left:auto;margin-right:auto;">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="sport-tags-grid">
+      {%- for block in section.blocks -%}
+        {%- assign sport_url = block.settings.url | default: '/collections/all?filter.p.m.custom.sport=' | append: block.settings.label | url_encode -%}
+        <a
+          href="{{ sport_url }}"
+          class="sport-tag"
+          {{ block.shopify_attributes }}
+          id="sport-tag-{{ block.settings.label | handle }}"
+        >
+          {%- if block.settings.emoji != blank -%}
+            <span aria-hidden="true">{{ block.settings.emoji }}</span>
+          {%- endif -%}
+          {{ block.settings.label }}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by Sport",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Sport"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find the right sportswear for your game"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sport",
+      "name": "Sport",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Sport name",
+          "default": "Cricket"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji (optional)",
+          "default": "🏏"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL override (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by Sport",
+      "blocks": [
+        { "type": "sport", "settings": { "label": "Cricket", "emoji": "🏏" } },
+        { "type": "sport", "settings": { "label": "Football", "emoji": "⚽" } },
+        { "type": "sport", "settings": { "label": "Basketball", "emoji": "🏀" } },
+        { "type": "sport", "settings": { "label": "Kabaddi", "emoji": "🤼" } },
+        { "type": "sport", "settings": { "label": "Volleyball", "emoji": "🏐" } },
+        { "type": "sport", "settings": { "label": "Badminton", "emoji": "🏸" } },
+        { "type": "sport", "settings": { "label": "Hockey", "emoji": "🏑" } },
+        { "type": "sport", "settings": { "label": "Athletics", "emoji": "🏃" } },
+        { "type": "sport", "settings": { "label": "Boxing", "emoji": "🥊" } },
+        { "type": "sport", "settings": { "label": "Gym & Fitness", "emoji": "💪" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

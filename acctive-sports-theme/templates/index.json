@@ -1,0 +1,194 @@
+{
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "🏭 Factory-Direct Custom Sportswear | MOQ 5 Pieces | Pan-India Delivery | WhatsApp: +91 99971 00375",
+        "bg_color": "#0B1F33",
+        "text_color": "#FFFFFF",
+        "dismissible": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu"
+      }
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "ACCTIVE Sports Industries — Since 2003",
+        "heading": "Premium Sportswear, [orange]Factory Direct[/orange]",
+        "subheading": "Custom-made sportswear for teams, clubs, and retailers across India. Order from 5 pieces.",
+        "cta1_label": "Shop Sportswear",
+        "cta1_url": "/collections/all",
+        "cta2_label": "Get Custom Quote",
+        "cta2_url": "/pages/custom-order"
+      }
+    },
+    "trust-bar": {
+      "type": "trust-bar",
+      "settings": {}
+    },
+    "collection-grid": {
+      "type": "collection-grid",
+      "settings": {
+        "heading": "Shop by Category",
+        "subheading": "Explore our complete range of custom sportswear"
+      },
+      "blocks": {
+        "collar": {
+          "type": "category_card",
+          "settings": { "collection": "collar-t-shirts" }
+        },
+        "round": {
+          "type": "category_card",
+          "settings": { "collection": "round-neck-t-shirts" }
+        },
+        "shorts": {
+          "type": "category_card",
+          "settings": { "collection": "shorts" }
+        },
+        "lowers": {
+          "type": "category_card",
+          "settings": { "collection": "lowers" }
+        },
+        "tracksuits": {
+          "type": "category_card",
+          "settings": { "collection": "tracksuits" }
+        },
+        "jackets": {
+          "type": "category_card",
+          "settings": { "collection": "track-jackets" }
+        },
+        "featured": {
+          "type": "category_card",
+          "settings": { "collection": "featured" }
+        },
+        "new": {
+          "type": "category_card",
+          "settings": { "collection": "new-arrivals" }
+        }
+      },
+      "block_order": ["collar", "round", "shorts", "lowers", "tracksuits", "jackets", "featured", "new"]
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "heading": "Featured Products",
+        "subheading": "Our most popular custom sportswear",
+        "collection": "featured",
+        "products_count": 4
+      }
+    },
+    "shop-by-sport": {
+      "type": "shop-by-sport",
+      "settings": {
+        "heading": "Shop by Sport",
+        "subheading": "Find the right sportswear for your game"
+      },
+      "blocks": {
+        "cricket": { "type": "sport", "settings": { "label": "Cricket", "emoji": "🏏" } },
+        "football": { "type": "sport", "settings": { "label": "Football", "emoji": "⚽" } },
+        "basketball": { "type": "sport", "settings": { "label": "Basketball", "emoji": "🏀" } },
+        "kabaddi": { "type": "sport", "settings": { "label": "Kabaddi", "emoji": "🤼" } },
+        "volleyball": { "type": "sport", "settings": { "label": "Volleyball", "emoji": "🏐" } },
+        "badminton": { "type": "sport", "settings": { "label": "Badminton", "emoji": "🏸" } },
+        "hockey": { "type": "sport", "settings": { "label": "Hockey", "emoji": "🏑" } },
+        "athletics": { "type": "sport", "settings": { "label": "Athletics", "emoji": "🏃" } },
+        "boxing": { "type": "sport", "settings": { "label": "Boxing", "emoji": "🥊" } },
+        "gym": { "type": "sport", "settings": { "label": "Gym & Fitness", "emoji": "💪" } }
+      },
+      "block_order": ["cricket", "football", "basketball", "kabaddi", "volleyball", "badminton", "hockey", "athletics", "boxing", "gym"]
+    },
+    "custom-order-process": {
+      "type": "custom-order-process",
+      "settings": {
+        "heading": "How Custom Ordering Works",
+        "subheading": "Simple 4-step process to get your custom sportswear",
+        "show_cta": true,
+        "cta_label": "Start Your Custom Order",
+        "cta_url": "/pages/custom-order"
+      },
+      "blocks": {
+        "step1": { "type": "step", "settings": { "title": "Choose Product", "description": "Browse our catalogue and select the style you want to customize." } },
+        "step2": { "type": "step", "settings": { "title": "Share Your Design", "description": "Send us your logo, colors, and design ideas via WhatsApp or email." } },
+        "step3": { "type": "step", "settings": { "title": "Approve Mockup", "description": "We will share a digital mockup for your approval before production." } },
+        "step4": { "type": "step", "settings": { "title": "Place Order", "description": "Confirm quantity, finalize details, and we handle the rest." } }
+      },
+      "block_order": ["step1", "step2", "step3", "step4"]
+    },
+    "new-arrivals": {
+      "type": "featured-products",
+      "settings": {
+        "heading": "New Arrivals",
+        "subheading": "Fresh styles added to our collection",
+        "collection": "new-arrivals",
+        "products_count": 4
+      }
+    },
+    "why-choose-us": {
+      "type": "why-choose-us",
+      "settings": {
+        "heading": "Why Choose ACCTIVE Sports?"
+      },
+      "blocks": {
+        "w1": { "type": "reason", "settings": { "icon": "factory", "title": "Factory-Direct Pricing", "description": "No middlemen. Deal directly with our Meerut factory for the best prices." } },
+        "w2": { "type": "reason", "settings": { "icon": "customize", "title": "100% Custom Branding", "description": "Your logo, colors, and design on every product." } },
+        "w3": { "type": "reason", "settings": { "icon": "quality", "title": "Premium Quality Fabrics", "description": "Sport-specific fabrics — dry-fit, fleece, polyester, and more." } },
+        "w4": { "type": "reason", "settings": { "icon": "moq", "title": "Low MOQ — 5 Pieces", "description": "Perfect for small teams, clubs, and startups." } },
+        "w5": { "type": "reason", "settings": { "icon": "delivery", "title": "Pan-India Delivery", "description": "Fast, reliable shipping across India." } },
+        "w6": { "type": "reason", "settings": { "icon": "price", "title": "Bulk Discounts", "description": "Order 5+ pieces and unlock 50% off." } }
+      },
+      "block_order": ["w1", "w2", "w3", "w4", "w5", "w6"]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "show_contact": true
+      },
+      "blocks": {
+        "faq1": { "type": "faq_item", "settings": { "question": "What is the minimum order quantity (MOQ)?", "answer": "<p>Our minimum order quantity is 5 pieces per product.</p>" } },
+        "faq2": { "type": "faq_item", "settings": { "question": "Can I get my logo printed on the products?", "answer": "<p>Yes! We offer full custom branding including logo printing and embroidery.</p>" } },
+        "faq3": { "type": "faq_item", "settings": { "question": "How long does production take?", "answer": "<p>Standard: 7–10 days. Custom: 10–15 days after design approval.</p>" } },
+        "faq4": { "type": "faq_item", "settings": { "question": "Do you offer bulk discounts?", "answer": "<p>Yes! Orders of 5+ pieces receive a 50% discount, applied at checkout.</p>" } },
+        "faq5": { "type": "faq_item", "settings": { "question": "Do you ship across India?", "answer": "<p>Yes, we ship pan-India. Delivery takes 3–7 days after dispatch.</p>" } }
+      },
+      "block_order": ["faq1", "faq2", "faq3", "faq4", "faq5"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Stay in the Loop",
+        "subheading": "New arrivals, bulk deals, and sportswear inspiration — straight to your inbox.",
+        "placeholder": "Enter your email address",
+        "submit_label": "Subscribe"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "footer_menu_1": "footer",
+        "footer_menu_2": "footer-collections"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "hero",
+    "trust-bar",
+    "collection-grid",
+    "featured-products",
+    "shop-by-sport",
+    "custom-order-process",
+    "new-arrivals",
+    "why-choose-us",
+    "faq",
+    "newsletter",
+    "footer"
+  ]
+}

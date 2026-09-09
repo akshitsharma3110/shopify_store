@@ -1,0 +1,84 @@
+{% comment %}
+  Section: announcement-bar.liquid
+  Theme Editor: customizable text, link, colors, dismissible toggle
+{% endcomment %}
+
+{%- if section.settings.show_announcement -%}
+  <div
+    class="announcement-bar"
+    id="announcement-bar"
+    style="background-color:{{ section.settings.bg_color }};color:{{ section.settings.text_color }};"
+    role="region"
+    aria-label="Announcement"
+  >
+    <div class="container" style="display:flex;align-items:center;justify-content:center;gap:12px;position:relative;">
+      {%- if section.settings.announcement_text != blank -%}
+        {%- if section.settings.announcement_link != blank -%}
+          <a href="{{ section.settings.announcement_link }}" style="color:inherit;">
+            {{ section.settings.announcement_text }}
+          </a>
+        {%- else -%}
+          <p style="margin:0;">{{ section.settings.announcement_text }}</p>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if section.settings.dismissible -%}
+        <button
+          data-announcement-dismiss
+          aria-label="Dismiss announcement"
+          style="position:absolute;right:0;background:none;border:none;cursor:pointer;color:inherit;opacity:0.7;padding:4px;display:flex;"
+        >
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "🏭 Factory-Direct Custom Sportswear | MOQ 5 Pieces | Pan-India Delivery | WhatsApp: +91 99971 00375"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement link (optional)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#0B1F33"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "dismissible",
+      "label": "Allow users to dismiss",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

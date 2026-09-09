@@ -1,0 +1,134 @@
+{% comment %}
+  Section: custom-order-process.liquid
+  4-step custom ordering process
+{% endcomment %}
+
+<section class="section" id="custom-order-process" style="background-color:var(--color-white);">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="section-subheading" style="margin-left:auto;margin-right:auto;">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="order-steps">
+      {%- for block in section.blocks -%}
+        <div class="order-step" {{ block.shopify_attributes }}>
+          <div class="order-step-number" aria-hidden="true">{{ forloop.index }}</div>
+          <div>
+            <h3 class="order-step-title">{{ block.settings.title }}</h3>
+            <p class="order-step-desc">{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_cta -%}
+      <div style="text-align:center;margin-top:48px;">
+        <a href="{{ section.settings.cta_url | default: '/pages/custom-order' }}" class="btn btn-primary btn-lg" id="custom-order-cta">
+          {{ section.settings.cta_label | default: 'Start Your Custom Order' }}
+        </a>
+        <p style="margin-top:12px;font-size:13px;color:var(--color-muted);">
+          Or WhatsApp us at
+          <a href="https://wa.me/{{ settings.whatsapp_number }}" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);font-weight:600;">
+            {{ settings.contact_phone_display }}
+          </a>
+        </p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Order Process",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Custom Ordering Works"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Simple 4-step process to get your custom sportswear"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "Start Your Custom Order"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Choose Product"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step description",
+          "default": "Browse our catalogue and select the style you want to customize."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Order Process",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Choose Product",
+            "description": "Browse our catalogue and select the style you want to customize."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Share Your Design",
+            "description": "Send us your logo, colors, and design ideas via WhatsApp or email."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Approve Mockup",
+            "description": "We will share a digital mockup for your approval before production."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Place Order",
+            "description": "Confirm quantity, finalize details, and we handle the rest."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

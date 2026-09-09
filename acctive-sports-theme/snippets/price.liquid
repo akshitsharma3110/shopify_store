@@ -1,0 +1,31 @@
+{% comment %}
+  Snippet: price.liquid
+  Usage: {% render 'price', product: product %}
+  Handles: MRP + 25% off display, "Price on request" for ₹0 products
+{% endcomment %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign price = current_variant.price
+  assign compare_price = current_variant.compare_at_price
+  assign price_on_request = false
+  if price == 0 or price == blank
+    assign price_on_request = true
+  endif
+-%}
+
+{%- if price_on_request -%}
+  <span class="price-on-request">{{ 'products.price_on_request' | t }}</span>
+{%- else -%}
+  <div class="product-card-price">
+    <span class="price-current">{{ price | money }}</span>
+    {%- if compare_price > price -%}
+      <span class="price-compare">
+        <span class="visually-hidden">{{ 'products.mrp_label' | t }}: </span>
+        {{ compare_price | money }}
+      </span>
+      {%- assign savings_pct = compare_price | minus: price | times: 100 | divided_by: compare_price | round -%}
+      <span class="badge badge-accent">{{ savings_pct }}% off</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

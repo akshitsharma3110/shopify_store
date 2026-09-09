@@ -1,0 +1,32 @@
+{
+  "current": {
+    "color_primary": "#0B1F33",
+    "color_accent": "#FF6B1A",
+    "color_accent_hover": "#E85A0C",
+    "color_background": "#F8FAFC",
+    "color_card_bg": "#FFFFFF",
+    "color_text": "#17212B",
+    "color_muted": "#64748B",
+    "color_border": "#E2E8F0",
+    "type_body_font": "inter_n4",
+    "body_font_size": 16,
+    "page_width": 1280,
+    "spacing_sections": 64,
+    "header_sticky": true,
+    "custom_order_label": "Custom Order",
+    "custom_order_url": "/pages/custom-order",
+    "brand_name": "ACCTIVE Sports Industries",
+    "logo_width": 160,
+    "whatsapp_number": "919997100375",
+    "contact_email": "activesportswears@gmail.com",
+    "contact_address": "Meerut, Uttar Pradesh, India",
+    "contact_phone_display": "+91 99971 00375",
+    "show_bulk_discount": true,
+    "bulk_discount_min_qty": 5,
+    "bulk_discount_percentage": 50,
+    "bulk_discount_message": "5+ pieces — save 50% at checkout",
+    "cart_type": "drawer",
+    "show_order_note": true,
+    "footer_tagline": "<p>Factory-direct custom sportswear from Meerut, India. Quality you can trust since 2003.<\/p>"
+  }
+}

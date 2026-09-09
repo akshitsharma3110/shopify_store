@@ -1,0 +1,44 @@
+{% comment %}
+  Snippet: pagination.liquid
+  Usage: {% render 'pagination', paginate: paginate %}
+{% endcomment %}
+
+{%- if paginate.pages > 1 -%}
+  <nav class="pagination" role="navigation" aria-label="{{ 'pagination.page' | t: page: paginate.current_page }}">
+
+    {%- if paginate.previous -%}
+      <a href="{{ paginate.previous.url }}" class="pagination-link" aria-label="{{ 'pagination.previous' | t }}">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+    {%- else -%}
+      <span class="pagination-link disabled" aria-disabled="true">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </span>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a href="{{ part.url }}" class="pagination-link {% if part.title == paginate.current_page %}active{% endif %}"
+          aria-label="{{ 'pagination.page' | t: page: part.title }}"
+          {% if part.title == paginate.current_page %}aria-current="page"{% endif %}>
+          {{ part.title }}
+        </a>
+      {%- elsif part.title == '&hellip;' -%}
+        <span class="pagination-link" style="cursor:default;color:var(--color-muted);" aria-hidden="true">…</span>
+      {%- else -%}
+        <span class="pagination-link active" aria-current="page" aria-label="{{ 'pagination.page' | t: page: part.title }}">{{ part.title }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <a href="{{ paginate.next.url }}" class="pagination-link" aria-label="{{ 'pagination.next' | t }}">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    {%- else -%}
+      <span class="pagination-link disabled" aria-disabled="true">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    {%- endif -%}
+
+  </nav>
+{%- endif -%}

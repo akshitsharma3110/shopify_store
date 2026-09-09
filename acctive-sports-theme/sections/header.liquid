@@ -1,0 +1,152 @@
+{% comment %}
+  Section: header.liquid
+  Sticky header with logo, navigation, search, cart, and custom order CTA
+{% endcomment %}
+
+<header class="site-header" id="site-header" role="banner">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <a href="/" class="header-logo" aria-label="{{ shop.name }}">
+      {%- if settings.logo != blank -%}
+        <img
+          src="{{ settings.logo | image_url: width: 320 }}"
+          alt="{{ shop.name }}"
+          width="{{ settings.logo_width }}"
+          height="{{ settings.logo_width | divided_by: 4 | round }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <span class="header-logo-text">
+          <span>ACCTIVE</span> Sports
+        </span>
+      {%- endif -%}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="header-nav" role="navigation" aria-label="Main menu">
+      {%- for link in linklists[section.settings.menu].links -%}
+        {%- if link.links != blank -%}
+          <div style="position:relative;" class="nav-dropdown-wrapper">
+            <button
+              class="header-nav-link"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style="cursor:pointer;background:none;border:none;"
+            >
+              {{ link.title }}
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left:4px;"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul style="
+              position:absolute;
+              top:100%;
+              left:0;
+              min-width:200px;
+              background:white;
+              border:1px solid var(--color-border);
+              border-radius:var(--border-radius-md);
+              box-shadow:var(--shadow-lg);
+              list-style:none;
+              padding:8px 0;
+              z-index:var(--z-dropdown);
+              display:none;
+            " class="nav-dropdown">
+              {%- for child in link.links -%}
+                <li>
+                  <a href="{{ child.url }}" class="header-nav-link" style="display:block;padding:8px 16px;border-radius:0;">
+                    {{ child.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- else -%}
+          <a
+            href="{{ link.url }}"
+            class="header-nav-link"
+            {% if link.active %}aria-current="page"{% endif %}
+          >
+            {{ link.title }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <!-- Search -->
+      <button
+        class="header-icon-btn"
+        data-search-open
+        aria-label="{{ 'header.search_label' | t }}"
+        aria-controls="search-modal"
+        aria-expanded="false"
+        id="search-btn"
+      >
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <!-- Cart -->
+      <button
+        class="header-icon-btn"
+        data-cart-open
+        aria-label="{{ 'header.cart_label' | t }}"
+        aria-controls="cart-drawer"
+        aria-expanded="false"
+        id="cart-btn"
+      >
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count-bubble" data-cart-count style="display:none;">{{ cart.item_count }}</span>
+      </button>
+
+      <!-- Custom Order CTA -->
+      <a
+        href="{{ settings.custom_order_url | default: '/pages/custom-order' }}"
+        class="btn btn-primary btn-sm header-custom-order"
+        id="custom-order-btn"
+      >
+        {{ settings.custom_order_label | default: 'Custom Order' }}
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="header-menu-btn"
+        id="header-menu-open"
+        aria-label="{{ 'general.accessibility.open_menu' | t }}"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+      >
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<style>
+  /* Dropdown hover behavior */
+  .nav-dropdown-wrapper:hover .nav-dropdown,
+  .nav-dropdown-wrapper:focus-within .nav-dropdown {
+    display: block !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

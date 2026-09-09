@@ -1,0 +1,204 @@
+{% comment %}
+  Section: main-collection.liquid
+  Full catalogue page with filters, sort, product grid, active filters, pagination
+{% endcomment %}
+
+{%- paginate collection.products by section.settings.products_per_page -%}
+
+{%- render 'breadcrumb' -%}
+
+<div class="container" style="padding-top:32px;padding-bottom:64px;" id="collection-page">
+
+  <!-- Collection header -->
+  <div style="margin-bottom:32px;">
+    <h1 class="h2" style="color:var(--color-primary);">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p style="color:var(--color-muted);margin-top:8px;font-size:14px;max-width:60ch;">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+
+  <!-- Mobile filter toggle -->
+  <div style="display:none;" class="mobile-filter-bar" id="mobile-filter-bar">
+    <button id="filter-toggle" class="btn btn-secondary btn-sm" aria-controls="filter-sidebar" aria-expanded="false">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      Filters
+    </button>
+  </div>
+
+  <div class="collection-layout">
+
+    <!-- Sidebar Filters -->
+    <aside class="filter-sidebar" id="filter-sidebar" aria-label="Product filters">
+
+      {%- if section.settings.show_filter -%}
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <h2 style="font-size:14px;font-weight:700;color:var(--color-primary);letter-spacing:0.05em;text-transform:uppercase;">Filters</h2>
+          {%- if current_tags.size > 0 or current_filters.size > 0 -%}
+            <a href="{{ collection.url }}" style="font-size:12px;color:var(--color-accent);">Clear all</a>
+          {%- endif -%}
+        </div>
+
+        {%- for filter in collection.filters -%}
+          <div class="filter-group">
+            <h3 class="filter-group-title">{{ filter.label }}</h3>
+            {%- if filter.type == 'list' -%}
+              {%- for value in filter.values -%}
+                <label class="filter-option">
+                  <input
+                    type="checkbox"
+                    name="{{ filter.param_name }}"
+                    value="{{ value.value }}"
+                    {% if value.active %}checked{% endif %}
+                    onchange="this.form.submit()"
+                    form="collection-filter-form"
+                    id="filter-{{ filter.param_name }}-{{ forloop.index }}"
+                  >
+                  <span>{{ value.label }}</span>
+                  <span style="margin-left:auto;font-size:12px;color:var(--color-muted);">({{ value.count }})</span>
+                </label>
+              {%- endfor -%}
+            {%- elsif filter.type == 'price_range' -%}
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input
+                  type="number"
+                  name="{{ filter.min_value.param_name }}"
+                  value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                  placeholder="Min"
+                  class="form-input"
+                  form="collection-filter-form"
+                  style="width:80px;padding:6px 8px;"
+                  aria-label="Minimum price"
+                >
+                <span style="color:var(--color-muted);">—</span>
+                <input
+                  type="number"
+                  name="{{ filter.max_value.param_name }}"
+                  value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                  placeholder="Max"
+                  class="form-input"
+                  form="collection-filter-form"
+                  style="width:80px;padding:6px 8px;"
+                  aria-label="Maximum price"
+                >
+                <button type="submit" form="collection-filter-form" class="btn btn-primary btn-sm">Go</button>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+
+        <form method="get" action="{{ collection.url }}" id="collection-filter-form">
+          <input type="hidden" name="sort_by" value="{{ collection.sort_by }}">
+        </form>
+      {%- endif -%}
+
+    </aside>
+
+    <!-- Main content -->
+    <div>
+
+      <!-- Active filters + Toolbar -->
+      {%- if collection.filters.size > 0 -%}
+        {%- assign active_filters = collection.filters | where: 'active_values' -%}
+        {%- if active_filters.size > 0 -%}
+          <div class="active-filters" aria-label="Active filters">
+            {%- for filter in collection.filters -%}
+              {%- for value in filter.active_values -%}
+                <a href="{{ value.url_to_remove }}" class="active-filter-chip">
+                  {{ filter.label }}: {{ value.label }}
+                  <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </a>
+              {%- endfor -%}
+            {%- endfor -%}
+            <a href="{{ collection.url }}" style="font-size:12px;color:var(--color-accent);align-self:center;">Clear all</a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      <div class="collection-toolbar">
+        <p class="collection-count">
+          {{ collection.products_count }}
+          {%- if collection.products_count == 1 %} product{%- else %} products{%- endif %}
+        </p>
+
+        {%- if section.settings.show_sort -%}
+          <div style="display:flex;align-items:center;gap:8px;">
+            <label for="sort-by" style="font-size:13px;color:var(--color-muted);">Sort:</label>
+            <select class="sort-select" id="sort-by" aria-label="Sort products">
+              {%- for option in collection.sort_options -%}
+                <option
+                  value="{{ option.value }}"
+                  {% if option.value == collection.sort_by %}selected{% endif %}
+                >
+                  {{ option.name }}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Product Grid -->
+      {%- if collection.products_count > 0 -%}
+        <div class="product-grid" id="product-grid">
+          {%- for product in collection.products -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+
+        <!-- Pagination -->
+        {% render 'pagination', paginate: paginate %}
+
+      {%- else -%}
+        <div style="text-align:center;padding:80px 20px;">
+          <svg width="48" height="48" fill="none" stroke="var(--color-muted)" stroke-width="1" viewBox="0 0 24 24" style="margin:0 auto 16px;opacity:0.4;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <h2 style="font-size:18px;color:var(--color-primary);margin-bottom:8px;">No products found</h2>
+          <p style="color:var(--color-muted);font-size:14px;margin-bottom:24px;">Try adjusting your filters or browse all products.</p>
+          <a href="{{ collection.url }}" class="btn btn-secondary">Clear Filters</a>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>
+
+<style>
+  @media (max-width: 900px) {
+    .mobile-filter-bar { display: flex !important; margin-bottom: 16px; }
+  }
+</style>
+
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filter",
+      "label": "Show filter sidebar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort",
+      "label": "Show sort dropdown",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Page"
+    }
+  ]
+}
+{% endschema %}

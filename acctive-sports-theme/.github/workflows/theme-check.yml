@@ -1,0 +1,25 @@
+name: ACCTIVE Sports Theme Check
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  theme-check:
+    runs-on: ubuntu-latest
+    name: Shopify Theme Check
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install Shopify Theme Check
+        run: gem install theme-check
+
+      - name: Run Theme Check
+        run: theme-check --fail-level error

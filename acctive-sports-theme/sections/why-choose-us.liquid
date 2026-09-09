@@ -1,0 +1,158 @@
+{% comment %}
+  Section: why-choose-us.liquid
+  Icon + text grid of selling points
+{% endcomment %}
+
+<section class="section" id="why-choose-us" style="background-color:var(--color-bg);">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="section-subheading" style="margin-left:auto;margin-right:auto;">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="why-grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          case block.settings.icon
+          when 'factory'
+            assign icon_path = 'M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z'
+          when 'customize'
+            assign icon_path = 'M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z'
+          when 'quality'
+            assign icon_path = 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'
+          when 'delivery'
+            assign icon_path = 'M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3m4 0h-3a2 2 0 00-2 2v6a2 2 0 002 2h3a2 2 0 002-2v-6a2 2 0 00-2-2z'
+          when 'moq'
+            assign icon_path = 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75'
+          when 'price'
+            assign icon_path = 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-4H9l3-3 3 3h-2v4zm0-8h-2V7h2v2z'
+          else
+            assign icon_path = 'M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3'
+          endcase
+        -%}
+        <div class="why-item" {{ block.shopify_attributes }}>
+          <div class="why-icon" aria-hidden="true">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="{{ icon_path }}"/>
+            </svg>
+          </div>
+          <div class="why-content">
+            <h3 class="why-title">{{ block.settings.title }}</h3>
+            <p class="why-desc">{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why Choose Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Choose ACCTIVE Sports?"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Reason",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "factory", "label": "Factory" },
+            { "value": "customize", "label": "Customize" },
+            { "value": "quality", "label": "Quality/Shield" },
+            { "value": "delivery", "label": "Delivery" },
+            { "value": "moq", "label": "MOQ/Team" },
+            { "value": "price", "label": "Pricing" },
+            { "value": "check", "label": "Checkmark" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Factory-Direct Pricing"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "No middlemen. You deal directly with the manufacturer for the best prices."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose Us",
+      "blocks": [
+        {
+          "type": "reason",
+          "settings": {
+            "icon": "factory",
+            "title": "Factory-Direct Pricing",
+            "description": "No middlemen. You deal directly with our Meerut factory for the best prices."
+          }
+        },
+        {
+          "type": "reason",
+          "settings": {
+            "icon": "customize",
+            "title": "100% Custom Branding",
+            "description": "Your logo, colors, and design on every product. We handle logo printing and embroidery."
+          }
+        },
+        {
+          "type": "reason",
+          "settings": {
+            "icon": "quality",
+            "title": "Premium Quality Fabrics",
+            "description": "We use high-grade, sport-specific fabrics — dry-fit, fleece, polyester, and more."
+          }
+        },
+        {
+          "type": "reason",
+          "settings": {
+            "icon": "moq",
+            "title": "Low MOQ — 5 Pieces",
+            "description": "Order as few as 5 pieces. Perfect for small teams, clubs, and startups."
+          }
+        },
+        {
+          "type": "reason",
+          "settings": {
+            "icon": "delivery",
+            "title": "Pan-India Delivery",
+            "description": "Fast, reliable shipping across India. Bulk orders dispatched on time."
+          }
+        },
+        {
+          "type": "reason",
+          "settings": {
+            "icon": "price",
+            "title": "Bulk Discounts",
+            "description": "Order 5+ pieces and unlock 50% off. The more you order, the more you save."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

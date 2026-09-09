@@ -1,0 +1,173 @@
+{% comment %}
+  Section: hero.liquid
+  Full-width hero with headline, subheadline, dual CTAs, and product image
+{% endcomment %}
+
+<section class="hero" id="hero-section">
+  {%- if section.settings.bg_image != blank -%}
+    <img
+      class="hero-bg-image"
+      src="{{ section.settings.bg_image | image_url: width: 1920 }}"
+      alt=""
+      aria-hidden="true"
+      loading="eager"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-inner">
+    <!-- Content -->
+    <div class="hero-content">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="hero-eyebrow">
+          <svg width="16" height="16" fill="var(--color-accent)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+          {{ section.settings.eyebrow }}
+        </div>
+      {%- endif -%}
+
+      <h1 class="hero-heading">
+        {{ section.settings.heading | replace: '[orange]', '<span class="accent">' | replace: '[/orange]', '</span>' }}
+      </h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero-sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="hero-ctas">
+        {%- if section.settings.cta1_label != blank -%}
+          <a
+            href="{{ section.settings.cta1_url | default: '/collections/all' }}"
+            class="btn btn-primary btn-lg"
+            id="hero-cta-shop"
+          >
+            {{ section.settings.cta1_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}
+          <a
+            href="{{ section.settings.cta2_url | default: '/pages/custom-order' }}"
+            class="btn btn-outline-white btn-lg"
+            id="hero-cta-quote"
+          >
+            {{ section.settings.cta2_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Trust indicators -->
+      <div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);">
+        <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.7);">
+          <svg width="16" height="16" fill="none" stroke="var(--color-accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          MOQ: 5 pieces
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.7);">
+          <svg width="16" height="16" fill="none" stroke="var(--color-accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Custom branding
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.7);">
+          <svg width="16" height="16" fill="none" stroke="var(--color-accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Pan-India shipping
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Image -->
+    {%- if section.settings.product_image != blank -%}
+      <div class="hero-image-wrapper">
+        <img
+          src="{{ section.settings.product_image | image_url: width: 700 }}"
+          alt="{{ section.settings.product_image_alt | default: 'ACCTIVE Sportswear' }}"
+          width="700"
+          height="700"
+          loading="eager"
+          style="border-radius:12px;object-fit:cover;"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "ACCTIVE Sports Industries — Since 2003"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading (use [orange]...[/orange] for accent color)",
+      "default": "Premium Sportswear, [orange]Factory Direct[/orange]"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Custom-made sportswear for teams, clubs, and retailers across India. Order from 5 pieces."
+    },
+    {
+      "type": "header",
+      "content": "CTAs"
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "Primary button label",
+      "default": "Shop Sportswear"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "Primary button URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Secondary button label",
+      "default": "Get Custom Quote"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "Secondary button URL",
+      "default": "/pages/custom-order"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product/hero image (right side)"
+    },
+    {
+      "type": "text",
+      "id": "product_image_alt",
+      "label": "Product image alt text",
+      "default": "ACCTIVE Sportswear Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

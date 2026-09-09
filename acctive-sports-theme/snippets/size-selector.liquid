@@ -1,0 +1,52 @@
+{% comment %}
+  Snippet: size-selector.liquid
+  Usage: {% render 'size-selector', product: product, selected_variant: selected_variant %}
+  Shows all sizes; unavailable ones are disabled (not hidden)
+{% endcomment %}
+
+{%- liquid
+  assign size_option_index = nil
+  for option in product.options
+    if option == 'Size'
+      assign size_option_index = forloop.index0
+    endif
+  endfor
+-%}
+
+{%- if size_option_index != nil -%}
+  <div class="size-selector">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <span class="form-label" style="margin-bottom:0;">{{ 'products.sizes_label' | t }}</span>
+      <span style="font-size:12px;color:var(--color-muted);">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Strikethrough = sold out
+      </span>
+    </div>
+    <div class="size-options" role="group" aria-label="{{ 'products.sizes_label' | t }}">
+      {%- for variant in product.variants -%}
+        {%- assign size_value = variant.options[size_option_index] -%}
+        {%- assign is_available = variant.available -%}
+        {%- assign is_selected = false -%}
+        {%- if selected_variant.id == variant.id -%}
+          {%- assign is_selected = true -%}
+        {%- endif -%}
+        <button
+          type="button"
+          class="size-option {% if is_selected %}active{% endif %} {% unless is_available %}disabled{% endunless %}"
+          data-variant-id="{{ variant.id }}"
+          data-price="{{ variant.price }}"
+          data-compare-price="{{ variant.compare_at_price }}"
+          data-available="{{ is_available }}"
+          {% if is_available %}
+            aria-pressed="{{ is_selected }}"
+          {% else %}
+            aria-disabled="true"
+            title="Size {{ size_value }} is sold out"
+          {% endif %}
+        >
+          {{ size_value }}
+        </button>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

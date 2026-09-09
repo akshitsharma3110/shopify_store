@@ -1,0 +1,68 @@
+{% comment %}
+  Section: main-search.liquid
+  Search results page
+{% endcomment %}
+
+<div class="container" style="padding-top:40px;padding-bottom:80px;" id="search-page">
+  <!-- Search form -->
+  <div style="max-width:600px;margin:0 auto 40px;">
+    <h1 class="h2" style="color:var(--color-primary);text-align:center;margin-bottom:24px;">
+      {%- if search.performed -%}
+        Results for &ldquo;{{ search.terms | escape }}&rdquo;
+      {%- else -%}
+        Search our store
+      {%- endif -%}
+    </h1>
+    <form action="/search" method="get" class="search-form" style="background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--border-radius-md);padding:8px;">
+      <input
+        type="search"
+        name="q"
+        class="form-input"
+        placeholder="Search products..."
+        value="{{ search.terms | escape }}"
+        style="border:none;box-shadow:none;font-size:16px;"
+        autocomplete="off"
+        id="search-page-input"
+      >
+      <input type="hidden" name="type" value="product">
+      <button type="submit" class="btn btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search
+      </button>
+    </form>
+  </div>
+
+  {%- if search.performed -%}
+    {%- if search.results_count > 0 -%}
+      <p style="font-size:14px;color:var(--color-muted);margin-bottom:32px;text-align:center;">
+        {{ search.results_count }} result{{ search.results_count | pluralize: '', 's' }} for &ldquo;{{ search.terms | escape }}&rdquo;
+      </p>
+      <div class="product-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div style="text-align:center;padding:40px 20px;">
+        <svg width="48" height="48" fill="none" stroke="var(--color-muted)" stroke-width="1" viewBox="0 0 24 24" style="margin:0 auto 16px;opacity:0.4;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h2 style="font-size:18px;color:var(--color-primary);margin-bottom:8px;">No results found</h2>
+        <p style="color:var(--color-muted);font-size:14px;margin-bottom:24px;">Try different keywords or browse all products.</p>
+        <a href="/collections/all" class="btn btn-primary">Browse All Products</a>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Search Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Search Page"
+    }
+  ]
+}
+{% endschema %}

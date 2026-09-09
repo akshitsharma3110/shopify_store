@@ -1,0 +1,179 @@
+{
+  "general": {
+    "search": {
+      "search": "Search",
+      "search_placeholder": "Search products...",
+      "no_results": "No results for \"{{ terms }}\"",
+      "results_with_count": {
+        "one": "{{ count }} result for \"{{ terms }}\"",
+        "other": "{{ count }} results for \"{{ terms }}\""
+      },
+      "search_for": "Search for",
+      "close": "Close"
+    },
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu",
+      "open_cart": "Open cart",
+      "close_cart": "Close cart"
+    },
+    "continue_shopping": "Continue shopping",
+    "view_all": "View all",
+    "loading": "Loading...",
+    "error": "An error occurred. Please try again."
+  },
+  "header": {
+    "logo_link": "Home",
+    "custom_order_cta": "Custom Order",
+    "search_label": "Search",
+    "cart_label": "Cart",
+    "cart_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    }
+  },
+  "announcement": {
+    "default_text": "Factory-Direct Custom Sportswear | MOQ 5 Pieces | Pan-India Delivery"
+  },
+  "hero": {
+    "default_heading": "Premium Sportswear, Factory Direct",
+    "default_subheading": "Custom-made sportswear for teams, clubs, and retailers. Minimum 5 pieces.",
+    "cta_shop": "Shop Sportswear",
+    "cta_quote": "Get Custom Quote"
+  },
+  "trust_bar": {
+    "factory_direct": "Factory Direct",
+    "factory_direct_desc": "Cut out the middleman",
+    "customizable": "Fully Customizable",
+    "customizable_desc": "Your design, your brand",
+    "delivery": "Pan-India Delivery",
+    "delivery_desc": "Ships across India",
+    "since": "Since 2003",
+    "since_desc": "20+ years of expertise"
+  },
+  "products": {
+    "add_to_cart": "Add to Cart",
+    "sold_out": "Sold Out",
+    "unavailable": "Unavailable",
+    "price_on_request": "Price on Request",
+    "request_quote_whatsapp": "Request Quote on WhatsApp",
+    "mrp_label": "MRP",
+    "moq_label": "MOQ",
+    "fabric_label": "Fabric",
+    "sport_label": "Sport",
+    "from_price": "From",
+    "sizes_label": "Size",
+    "quantity_label": "Quantity",
+    "quick_add": "Quick Add",
+    "view_product": "View Product",
+    "out_of_stock": "Out of Stock",
+    "select_size": "Select Size",
+    "bulk_discount_notice": "Add 5+ pieces and save 50% — discount applied at checkout",
+    "bulk_discount_badge": "5+ pieces — save 50%",
+    "related_products": "You May Also Like",
+    "featured_collection": "Featured Products"
+  },
+  "collection": {
+    "filter_by": "Filter by",
+    "sort_by": "Sort by",
+    "active_filters": "Active filters",
+    "clear_all": "Clear all",
+    "remove_filter": "Remove filter",
+    "apply_filters": "Apply",
+    "showing_count": {
+      "one": "Showing {{ count }} product",
+      "other": "Showing {{ count }} products"
+    },
+    "no_products": "No products found. Try adjusting your filters.",
+    "filters": {
+      "price": "Price",
+      "category": "Category",
+      "fabric": "Fabric",
+      "sport": "Sport"
+    },
+    "sort": {
+      "featured": "Featured",
+      "best_selling": "Best Selling",
+      "a_z": "A–Z",
+      "z_a": "Z–A",
+      "price_asc": "Price: Low to High",
+      "price_desc": "Price: High to Low",
+      "date_desc": "Newest"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "empty_message": "Start shopping to add products to your cart.",
+    "item_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    },
+    "subtotal": "Subtotal",
+    "taxes_note": "Taxes and shipping calculated at checkout",
+    "checkout": "Proceed to Checkout",
+    "continue_shopping": "Continue Shopping",
+    "remove_item": "Remove",
+    "update_quantity": "Update quantity",
+    "bulk_discount_active": "🎉 Bulk discount (50%) will be applied at checkout",
+    "bulk_discount_threshold": "Add {{ count }} more piece(s) to unlock 50% bulk discount",
+    "order_note_label": "Order notes / customization details",
+    "order_note_placeholder": "Color, logo, custom text, delivery details..."
+  },
+  "footer": {
+    "quick_links": "Quick Links",
+    "contact": "Contact Us",
+    "newsletter_heading": "Get Updates",
+    "newsletter_desc": "New arrivals and exclusive offers.",
+    "newsletter_placeholder": "Your email address",
+    "newsletter_submit": "Subscribe",
+    "newsletter_success": "Thank you for subscribing!",
+    "copyright": "© {{ year }} ACCTIVE Sports Industries. All rights reserved.",
+    "address": "Meerut, Uttar Pradesh, India",
+    "whatsapp_label": "Chat on WhatsApp",
+    "email_label": "Email Us",
+    "made_in_india": "Made in India 🇮🇳"
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions"
+  },
+  "custom_order": {
+    "heading": "How Custom Ordering Works",
+    "step1_title": "Choose Product",
+    "step1_desc": "Browse our catalogue and select the style you want to customize.",
+    "step2_title": "Share Your Design",
+    "step2_desc": "Send us your logo, colors, and design ideas via WhatsApp or email.",
+    "step3_title": "Approve Mockup",
+    "step3_desc": "We'll share a digital mockup for your approval before production.",
+    "step4_title": "Place Order",
+    "step4_desc": "Confirm quantity, finalize details, and we handle the rest."
+  },
+  "newsletter": {
+    "heading": "Stay in the Loop",
+    "subheading": "New arrivals, offers, and sportswear inspiration.",
+    "placeholder": "Enter your email",
+    "submit": "Subscribe",
+    "success": "You're subscribed. Thank you!"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{ page }}"
+  },
+  "product_page": {
+    "tab_details": "Product Details",
+    "tab_customization": "Customization",
+    "tab_delivery": "Delivery",
+    "customization_content": "We offer full customization including logo printing, embroidery, custom colors, and fabric selection. Minimum order 5 pieces. Send your requirements via WhatsApp.",
+    "delivery_content": "We ship pan-India. Delivery time is 7–14 working days after order confirmation. Bulk orders may take 14–21 days.",
+    "whatsapp_quote": "Request Custom Quote on WhatsApp",
+    "share_design": "Share Your Design"
+  },
+  "404": {
+    "title": "Page Not Found",
+    "heading": "Oops! This page doesn't exist.",
+    "message": "The page you're looking for may have been moved or doesn't exist.",
+    "cta": "Back to Home"
+  }
+}
