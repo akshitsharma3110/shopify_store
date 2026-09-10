@@ -1,10 +1,16 @@
 {
   "type": "footer",
-  "name": "Footer",
+  "name": "Footer group",
   "sections": {
     "footer": {
       "type": "footer",
       "settings": {
+        "tagline": "Premium Custom Sportswear, Manufactured in Meerut. Vibrant sublimation, premium fabrics, custom designs and bulk orders with pan-India delivery.",
+        "address": "41/31A Mokhampur, Plot No. 36, Sports Complex Enclave, Delhi Road, Meerut, Uttar Pradesh 250002, India",
+        "phone2": "+91 80062 77622",
+        "col2_heading": "Explore",
+        "col3_heading": "Products",
+        "col4_heading": "Get in touch",
         "footer_menu_1": "footer",
         "footer_menu_2": "footer-collections"
       }
