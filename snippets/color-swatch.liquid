@@ -1,0 +1,39 @@
+{% comment %}Snippet: color-swatch.liquid — Renders colour swatch circles{% endcomment %}
+{% comment %}
+  Usage: {% render 'color-swatch', option: option, form: form %}
+  Maps common color names to CSS colors.
+{% endcomment %}
+
+{%- assign color_map = 'black:#000000,white:#FFFFFF,red:#DC2626,blue:#2563EB,navy:#1E3A5F,green:#16A34A,yellow:#EAB308,orange:#EA580C,pink:#EC4899,purple:#9333EA,grey:#9CA3AF,gray:#9CA3AF,maroon:#7F1D1D,brown:#92400E,teal:#0D9488,olive:#4D7C0F,indigo:#4338CA,sky:#0EA5E9,lime:#84CC16,amber:#F59E0B,rose:#F43F5E,violet:#7C3AED,cyan:#06B6D4' -%}
+
+{%- assign color_pairs = color_map | split: ',' -%}
+
+{%- for value in option.values -%}
+  {%- assign color_lower = value | downcase | replace: ' ', '' -%}
+  {%- assign color_hex = color_lower -%}
+
+  {%- for pair in color_pairs -%}
+    {%- assign pair_parts = pair | split: ':' -%}
+    {%- if pair_parts[0] == color_lower -%}
+      {%- assign color_hex = pair_parts[1] -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment %}Find variant image for this color{%- endcomment -%}
+  {%- assign variant_with_color = product.variants | where: 'option1', value | first -%}
+  {%- assign variant_img = '' -%}
+  {%- if variant_with_color.featured_image -%}
+    {%- assign variant_img = variant_with_color.featured_image | image_url: width: 540 -%}
+  {%- endif -%}
+
+  <button
+    type="button"
+    class="option-swatch {% if value == option.selected_value %}is-active{% endif %}"
+    data-option="{{ option.name }}"
+    data-value="{{ value }}"
+    data-variant-img="{{ variant_img }}"
+    title="{{ value }}"
+    aria-label="{{ value }}"
+    style="background-color: {{ color_hex }};"
+  ></button>
+{%- endfor -%}
