@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <meta name="theme-color" content="#0C0C0C">
+  <meta name="theme-color" content="#FF6B1A">
 
   {%- if settings.favicon != blank -%}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -12,7 +12,7 @@
 
   <title>
     {%- if page_title == shop.name -%}
-      {{ page_title }} | Premium Custom Sportswear, Meerut
+      {{ page_title }} | Premium Custom Sportswear — Meerut, India
     {%- else -%}
       {{ page_title }} | {{ shop.name }}
     {%- endif -%}
@@ -22,46 +22,44 @@
     <meta name="description" content="{{ page_description | escape }}">
   {%- endif -%}
 
-  {% render 'meta-tags' %}
+  {%- render 'meta-tags' -%}
 
-  <!-- Google Fonts: Editorial Fashion Typography -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Theme CSS -->
-  {{ 'base.css' | asset_url | stylesheet_tag }}
+  <!-- Theme styles -->
+  {{ 'base.css'  | asset_url | stylesheet_tag }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
-  <!-- CSS variables from theme settings -->
+  <!-- Dynamic CSS variables from Shopify settings -->
   <style>
     :root {
-      --color-primary:      {{ settings.color_primary | default: '#0C0C0C' }};
-      --color-accent:       {{ settings.color_accent | default: '#FF6B1A' }};
-      --color-accent-hover: {{ settings.color_accent_hover | default: '#E55A0A' }};
-      --color-bg:           {{ settings.color_background | default: '#FAFAFA' }};
-      --color-card-bg:      {{ settings.color_card_bg | default: '#FFFFFF' }};
-      --color-text:         {{ settings.color_text | default: '#1A1A1A' }};
-      --color-muted:        {{ settings.color_muted | default: '#6B7280' }};
-      --color-border:       {{ settings.color_border | default: '#E5E7EB' }};
-      --container-max:      {{ settings.page_width | default: 1280 }}px;
+      --color-accent:      {{ settings.color_accent      | default: '#FF6B1A' }};
+      --color-accent-dark: {{ settings.color_accent_hover | default: '#E05A0A' }};
+      --color-primary:     {{ settings.color_primary      | default: '#0F0F0F' }};
+      --color-bg:          {{ settings.color_background   | default: '#F5F5F7' }};
+      --color-surface:     {{ settings.color_card_bg      | default: '#FFFFFF' }};
+      --color-text:        {{ settings.color_text         | default: '#1A1A1A' }};
+      --color-text-muted:  {{ settings.color_muted        | default: '#555555' }};
+      --color-border:      {{ settings.color_border       | default: '#E0E0E0' }};
+      --container:         {{ settings.page_width | default: 1280 }}px;
     }
+    .js { }
   </style>
 
-  <!-- Bulk discount data (read by JS) -->
-  <script>
-    document.documentElement.dataset.bulkMin = {{ settings.bulk_discount_min_qty | default: 5 }};
-    document.documentElement.dataset.bulkPct = {{ settings.bulk_discount_percentage | default: 50 }};
-  </script>
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
 
   {{ content_for_header }}
 </head>
 
-<body id="{{ page_title | handle }}" class="template-{{ template.name }}">
+<body id="{{ page_title | handle }}" class="template-{{ template.name }} {% if template.suffix %}template-{{ template.name }}--{{ template.suffix }}{% endif %}">
 
-  <a href="#MainContent" class="visually-hidden skip-to-content-link btn">
-    {{- 'general.accessibility.skip_to_content' | t -}}
-  </a>
+  <script>document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js');</script>
+
+  <a href="#MainContent" class="visually-hidden skip-to-content-link btn">Skip to content</a>
 
   {%- sections 'header-group' -%}
 
@@ -71,38 +69,61 @@
 
   {%- sections 'footer-group' -%}
 
-  <!-- WhatsApp Float -->
-  {%- render 'whatsapp-button', style: 'float' -%}
+  <!-- WhatsApp Float Button -->
+  {%- if settings.whatsapp_number != blank -%}
+    <div class="whatsapp-float" id="whatsapp-float">
+      <a
+        href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' }}?text=Hello%21%20I%27m%20interested%20in%20your%20custom%20sportswear."
+        class="whatsapp-float-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  {%- endif -%}
 
   <!-- Mobile Nav Overlay -->
   <div id="mobile-nav-overlay" class="mobile-nav-overlay" aria-hidden="true"></div>
 
-  <!-- Mobile Nav -->
-  <nav id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile menu">
+  <!-- Mobile Nav Drawer -->
+  <nav id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
     <div class="mobile-nav-header">
       <a href="/" class="header-logo" aria-label="{{ shop.name }}">
         {%- if settings.logo != blank -%}
-          <img src="{{ settings.logo | image_url: width: 140 }}" alt="{{ shop.name }}" width="140" height="40" loading="lazy">
+          <img src="{{ settings.logo | image_url: width: 160 }}" alt="{{ shop.name }}" width="120" height="36" loading="lazy">
         {%- else -%}
-          <span class="header-logo-text"><span>ACCTIVE</span> Sports</span>
+          <span class="header-logo-text"><span class="accent">ACCTIVE</span> Sports</span>
         {%- endif -%}
       </a>
-      <button id="mobile-nav-close" class="header-icon-btn" aria-label="Close menu">
-        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <button id="mobile-nav-close" class="header-icon-btn" aria-label="Close navigation menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
 
     <div class="mobile-nav-links">
       {%- for link in linklists['main-menu'].links -%}
-        <a href="{{ link.url }}" class="mobile-nav-link">{{ link.title }}</a>
+        <a href="{{ link.url }}" class="mobile-nav-link" {% if link.url == request.path %}aria-current="page"{% endif %}>
+          {{ link.title }}
+        </a>
+      {%- else -%}
+        <a href="/" class="mobile-nav-link">Home</a>
+        <a href="/collections/all" class="mobile-nav-link">Shop</a>
+        <a href="/pages/about-us" class="mobile-nav-link">About</a>
+        <a href="/pages/contact" class="mobile-nav-link">Contact</a>
       {%- endfor -%}
     </div>
 
     <div class="mobile-nav-footer">
-      <a href="{{ settings.custom_order_url | default: '/pages/custom-order' }}" class="btn btn-accent btn-full">
-        {{ settings.custom_order_label | default: 'Custom Order' }}
-      </a>
-      {%- render 'whatsapp-button', style: 'inline' -%}
+      <a href="/collections/all" class="btn btn-primary btn-full">Shop All Products</a>
+      {%- if settings.whatsapp_number != blank -%}
+        <a href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' }}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-full">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+      {%- endif -%}
     </div>
   </nav>
 
@@ -110,27 +131,27 @@
   <div id="cart-drawer-overlay" class="cart-drawer-overlay" aria-hidden="true"></div>
 
   <!-- Cart Drawer -->
-  <div id="cart-drawer" class="cart-drawer" role="dialog" aria-label="{{ 'cart.title' | t }}" aria-modal="true">
+  <div id="cart-drawer" class="cart-drawer" role="dialog" aria-label="{{ 'cart.title' | t }}" aria-modal="true" aria-hidden="true">
     <div class="cart-drawer-header">
-      <h2 class="cart-drawer-title">{{ 'cart.title' | t }} <span id="cart-count-display" style="font-weight:400;font-size:0.875rem;color:var(--color-muted);"></span></h2>
+      <h2 class="cart-drawer-title">{{ 'cart.title' | t }}</h2>
       <button class="cart-drawer-close" data-cart-close aria-label="Close cart">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
 
     {%- if settings.show_bulk_discount -%}
-      <div class="bulk-discount-notice" style="margin: 0.75rem 1.5rem 0;">
+      <div class="bulk-discount-notice">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--color-accent);flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span id="bulk-discount-text">{{ settings.bulk_discount_message | default: '5+ pieces — save 50% at checkout' }}</span>
+        <span id="bulk-discount-text">Order {{ settings.bulk_discount_min_qty | default: 5 }}+ pieces → unlock {{ settings.bulk_discount_percentage | default: 50 }}% off at checkout</span>
       </div>
     {%- endif -%}
 
     <div id="cart-drawer-body" class="cart-drawer-body">
       <div class="cart-empty-state">
-        <svg class="cart-empty-icon" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>
+        <svg class="cart-empty-icon" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0Zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0Z"/></svg>
         <h3 class="cart-empty-title">{{ 'cart.empty' | t }}</h3>
         <p>{{ 'cart.empty_message' | t }}</p>
-        <a href="/collections/all" class="btn btn-primary" onclick="closeCartDrawer()">Shop Now</a>
+        <a href="/collections/all" class="btn btn-primary" onclick="window.cartDrawer && window.cartDrawer.close()">Shop Now</a>
       </div>
     </div>
 
@@ -142,16 +163,16 @@
       <p class="cart-taxes-note">{{ 'cart.taxes_note' | t }}</p>
       {%- if settings.show_order_note -%}
         <details>
-          <summary style="font-size:13px;color:var(--color-muted);cursor:pointer;margin-bottom:8px;">{{ 'cart.order_note_label' | t }}</summary>
-          <textarea class="form-textarea" rows="2" style="font-size:13px;margin-top:8px;" placeholder="{{ 'cart.order_note_placeholder' | t }}"></textarea>
+          <summary style="font-size:var(--text-sm);color:var(--color-text-muted);cursor:pointer;margin-bottom:8px;user-select:none;">{{ 'cart.order_note_label' | t }}</summary>
+          <textarea class="form-input" rows="2" style="border-radius:var(--radius-md);margin-top:8px;font-size:var(--text-sm);" placeholder="{{ 'cart.order_note_placeholder' | t }}"></textarea>
         </details>
       {%- endif -%}
-      <a href="/checkout" class="btn btn-accent btn-full" id="cart-checkout-btn">{{ 'cart.checkout' | t }}</a>
-      <a href="/collections/all" class="btn btn-secondary btn-full" onclick="closeCartDrawer()">{{ 'cart.continue_shopping' | t }}</a>
+      <a href="/checkout" class="btn btn-accent btn-full btn-lg" id="cart-checkout-btn">{{ 'cart.checkout' | t }}</a>
+      <a href="/collections/all" class="btn btn-outline btn-full" onclick="window.cartDrawer && window.cartDrawer.close()">{{ 'cart.continue_shopping' | t }}</a>
     </div>
   </div>
 
-  <!-- Theme JS -->
+  <!-- Theme JavaScript -->
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 
 </body>

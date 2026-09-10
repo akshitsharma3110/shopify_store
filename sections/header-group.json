@@ -1,23 +1,20 @@
 {
   "type": "header",
-  "name": "Header",
+  "name": "Header group",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "show_announcement": true,
-        "announcement_text": "🏭 Factory-Direct Custom Sportswear | MOQ 5 Pieces | Pan-India Delivery | WhatsApp: +91 99971 00375",
-        "bg_color": "#0B1F33",
-        "text_color": "#FFFFFF",
-        "dismissible": true
-      }
-    },
     "header": {
       "type": "header",
       "settings": {
-        "menu": "main-menu"
+        "show_announcement": true,
+        "announcement_text": "🏭 Factory-Direct Custom Sportswear | MOQ 5 Pieces | Pan-India Delivery | WhatsApp: +91 99971 00375",
+        "announcement_bg": "#0F0F0F",
+        "announcement_text_color": "#FFFFFF",
+        "announcement_dismissible": true,
+        "menu": "main-menu",
+        "cta_label": "Shop Now",
+        "cta_url": "/collections/all"
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": ["header"]
 }
