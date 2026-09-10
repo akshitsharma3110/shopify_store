@@ -6,8 +6,10 @@
       {%- if search.performed -%}
         {%- if search.results_count == 0 -%}
           No results for "{{ search.terms }}"
+        {%- elsif search.results_count == 1 -%}
+          1 result for "{{ search.terms }}"
         {%- else -%}
-          {{ search.results_count }} result{{ search.results_count | plural: '', 's' }} for "{{ search.terms }}"
+          {{ search.results_count }} results for "{{ search.terms }}"
         {%- endif -%}
       {%- else -%}
         Search

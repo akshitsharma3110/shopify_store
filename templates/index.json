@@ -46,24 +46,15 @@
         "jackets": {
           "type": "category_card",
           "settings": { "collection": "track-jackets" }
-        },
-        "featured": {
-          "type": "category_card",
-          "settings": { "collection": "featured" }
-        },
-        "new": {
-          "type": "category_card",
-          "settings": { "collection": "new-arrivals" }
         }
       },
-      "block_order": ["collar", "round", "shorts", "lowers", "tracksuits", "jackets", "featured", "new"]
+      "block_order": ["collar", "round", "shorts", "lowers", "tracksuits", "jackets"]
     },
     "featured-products": {
       "type": "featured-products",
       "settings": {
         "heading": "Featured Products",
         "subheading": "Our most popular custom sportswear",
-        "collection": "featured",
         "products_count": 4
       }
     },
@@ -104,15 +95,6 @@
       },
       "block_order": ["step1", "step2", "step3", "step4"]
     },
-    "new-arrivals": {
-      "type": "featured-products",
-      "settings": {
-        "heading": "New Arrivals",
-        "subheading": "Fresh styles added to our collection",
-        "collection": "new-arrivals",
-        "products_count": 4
-      }
-    },
     "why-choose-us": {
       "type": "why-choose-us",
       "settings": {
@@ -137,9 +119,9 @@
       "blocks": {
         "faq1": { "type": "faq_item", "settings": { "question": "What is the minimum order quantity (MOQ)?", "answer": "<p>Our minimum order quantity is 5 pieces per product.</p>" } },
         "faq2": { "type": "faq_item", "settings": { "question": "Can I get my logo printed on the products?", "answer": "<p>Yes! We offer full custom branding including logo printing and embroidery.</p>" } },
-        "faq3": { "type": "faq_item", "settings": { "question": "How long does production take?", "answer": "<p>Standard: 7–10 days. Custom: 10–15 days after design approval.</p>" } },
+        "faq3": { "type": "faq_item", "settings": { "question": "How long does production take?", "answer": "<p>Standard: 7-10 days. Custom: 10-15 days after design approval.</p>" } },
         "faq4": { "type": "faq_item", "settings": { "question": "Do you offer bulk discounts?", "answer": "<p>Yes! Orders of 5+ pieces receive a 50% discount, applied at checkout.</p>" } },
-        "faq5": { "type": "faq_item", "settings": { "question": "Do you ship across India?", "answer": "<p>Yes, we ship pan-India. Delivery takes 3–7 days after dispatch.</p>" } }
+        "faq5": { "type": "faq_item", "settings": { "question": "Do you ship across India?", "answer": "<p>Yes, we ship pan-India. Delivery takes 3-7 days after dispatch.</p>" } }
       },
       "block_order": ["faq1", "faq2", "faq3", "faq4", "faq5"]
     },
@@ -147,7 +129,7 @@
       "type": "newsletter",
       "settings": {
         "heading": "Stay in the Loop",
-        "subheading": "New arrivals, bulk deals, and sportswear inspiration — straight to your inbox.",
+        "subheading": "New arrivals, bulk deals, and sportswear inspiration.",
         "placeholder": "Enter your email address",
         "submit_label": "Subscribe"
       }
@@ -160,7 +142,6 @@
     "featured-products",
     "shop-by-sport",
     "custom-order-process",
-    "new-arrivals",
     "why-choose-us",
     "faq",
     "newsletter"

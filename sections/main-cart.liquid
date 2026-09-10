@@ -12,7 +12,14 @@
           <a href="/collections/all" class="btn btn-accent btn-lg">Shop Now</a>
         </div>
       {%- else -%}
-        <h1 class="cart-page-title">Your Cart ({{ cart.item_count }} item{{ cart.item_count | plural: '', 's' }})</h1>
+        <h1 class="cart-page-title">
+          Your Cart
+          {%- if cart.item_count == 1 -%}
+            (1 item)
+          {%- else -%}
+            ({{ cart.item_count }} items)
+          {%- endif -%}
+        </h1>
 
         {%- if settings.show_bulk_discount -%}
           {%- assign bulk_min = settings.bulk_discount_min_qty | default: 5 -%}
